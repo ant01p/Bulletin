@@ -18,4 +18,14 @@ class UserRepository extends Repository
         return $users;
     }
 
+    public function find($id)
+    {
+        $sql = "SELECT * FROM user WHERE id=:id";
+        $request = $this->pdo->prepare($sql);
+        $request->execute(['id' => $id]);
+        $request->setFetchMode(\PDO::FETCH_CLASS, User::class);
+        $user = $request->fetch();
+
+        return $user;
+    }
 }

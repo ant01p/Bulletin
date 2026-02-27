@@ -1,0 +1,24 @@
+<?php $title = "Bulletin"; ?>
+
+<?php ob_start() ?>
+
+<h1>
+    <?= htmlspecialchars($user->getFirstname()) ?> 
+    <?= htmlspecialchars($user->getLastname()) ?>
+</h1>
+
+<ul>
+    <?php foreach($notes as $note) { ?>
+        <li>
+            <?= htmlspecialchars($note->getSubject()) ?> : 
+            <?= htmlspecialchars($note->getResult()) ?>
+        </li>
+    <?php } ?>
+</ul>
+
+<a href="?route=add&id=<?= $user->getId() ?>">Remplir le bulletin</a> <br><br>
+<a href="?route=index">Retour à la classe</a>
+
+<?php $content = ob_get_clean() ?>
+
+<?php require 'src/view/base.phtml' ?>
