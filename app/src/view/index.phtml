@@ -1,0 +1,19 @@
+<?php $title = "Classe"; ?>
+
+<?php ob_start() ?>
+
+<h1>Classe</h1>
+
+<ul>
+    <?php foreach($users as $user) { ?>
+    <li>
+        <?= htmlspecialchars($user->getFirstname()) ?>
+        <?= htmlspecialchars($user->getLastname()) ?>
+        <a href="?route=show&id=<?= $user->getId() ?>">📓</a>
+    </li>
+    <?php } ?> 
+</ul>
+
+<?php $content = ob_get_clean() ?>
+
+<?php require 'src/view/base.phtml' ?>
