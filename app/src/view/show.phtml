@@ -2,22 +2,40 @@
 
 <?php ob_start() ?>
 
-<h1>
-    <?= htmlspecialchars($user->getFirstname()) ?> 
-    <?= htmlspecialchars($user->getLastname()) ?>
-</h1>
+    <h1>
+        <?= htmlspecialchars($user->getFirstname()) ?> 
+        <?= htmlspecialchars($user->getLastname()) ?>
+    </h1>
 
-<ul>
-    <?php foreach($notes as $note) { ?>
-        <li>
-            <?= htmlspecialchars($note->getSubject()) ?> : 
-            <?= htmlspecialchars($note->getResult()) ?>
-        </li>
+    <ul>
+        <?php foreach($notes as $note) { ?>
+            <li>
+                <?= htmlspecialchars($note->getSubject()) ?> : 
+                <?= htmlspecialchars($note->getResult()) ?>
+            </li>
+        <?php } ?>
+    </ul>
+
+    <?php if($appreciation) { ?>
+    <?php } else { ?>
+        <a href="?route=add&id=<?= $user->getId() ?>">Remplir le bulletin</a>
     <?php } ?>
-</ul>
 
-<a href="?route=add&id=<?= $user->getId() ?>">Remplir le bulletin</a> <br><br>
-<a href="?route=index">Retour à la classe</a>
+    <?php if($appreciation) { ?>
+        <fieldset>
+            <legend>Commentaire</legend>
+
+            <p><?= htmlspecialchars($appreciation->getComment()) ?></p>
+
+            <h3><?= htmlspecialchars($appreciation->getMention()) ?></h3>
+
+            <a href="?route=update&id=<?= $user->getId() ?>">✏️</a>
+            <a href="?route=delete&id=<?= $user->getId() ?>">❌</a>
+
+        </fieldset>
+    <?php } ?> <br>
+
+    <a href="?route=index">Retour à la classe</a>
 
 <?php $content = ob_get_clean() ?>
 

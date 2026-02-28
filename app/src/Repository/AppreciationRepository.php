@@ -17,4 +17,15 @@ class AppreciationRepository extends Repository
             'id_user' => $appreciation->getId_user()
         ]);
     }
+
+    public function findByUser($id_user)
+    {
+        $sql = "SELECT * FROM appreciation WHERE id_user=:id_user";
+        $request = $this->pdo->prepare($sql);
+        $request->execute(['id_user' => $id_user]);
+        $request->setFetchMode(PDO::FETCH_CLASS, Appreciation::class);
+        $appreciation = $request->fetch();
+
+        return $appreciation;
+    }
 }

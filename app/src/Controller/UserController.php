@@ -3,6 +3,7 @@ namespace Notes\App\Controller;
 
 use Notes\App\Repository\UserRepository;
 use Notes\App\Repository\NoteRepository;
+use Notes\App\Repository\AppreciationRepository;
 
 class UserController 
 {
@@ -21,6 +22,7 @@ class UserController
 
         require ('src/view/index.phtml');
     }
+    
     public function show()
     {
         $id = $_GET['id'];
@@ -29,6 +31,9 @@ class UserController
 
         $noteRepo = new NoteRepository;
         $notes = $noteRepo->findByUser($id);
+
+        $appRepo = new AppreciationRepository;
+        $appreciation = $appRepo->findByUser($id);
 
         require('src/view/show.phtml');
     }
