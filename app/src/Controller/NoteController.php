@@ -45,4 +45,27 @@ class NoteController
         header('Location: index.php?route=show&id=' . $id);
         exit;
     }
+
+    public function update()
+    {
+        $id = $_GET['id'];
+
+        $user = $this->userRepo->find($id);
+
+        $appreciation = $this->appRepo->findByUser($id);
+
+        if(!empty($_POST)) {
+            $appreciation = new Appreciation;
+            $appreciation->setComment($_POST['comment'])
+            ->setMention($_POST['mention'])
+            ->setId_user($id);
+
+            $this->appRepo->update($appreciation);
+
+            header('Location: index.php?route=show&id=' . $id);
+            exit;
+        }
+
+        require('src/view/update.phtml');
+    }
 }

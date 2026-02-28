@@ -35,4 +35,15 @@ class AppreciationRepository extends Repository
         $request = $this->pdo->prepare($sql);
         $request->execute(['id_user' => $id_user]);
     }
+
+    public function update(Appreciation $appreciation)
+    {
+        $sql = "UPDATE appreciation SET comment=:comment, mention=:mention WHERE id_user=:id_user";
+        $request = $this->pdo->prepare($sql);
+        $request->execute([
+            'comment' => $appreciation->getComment(),
+            'mention' => $appreciation->getMention(),
+            'id_user' => $appreciation->getId_user()
+        ]);
+    }
 }

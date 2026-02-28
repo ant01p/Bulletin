@@ -21,4 +21,6 @@ if ($route === 'index') {
     $noteController->add();
 } elseif ($route === 'delete') {
     $noteController->delete();
+} elseif ($route === 'update') {
+    $noteController->update();
 }
