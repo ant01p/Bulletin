@@ -35,4 +35,14 @@ class NoteController
 
         require('src/view/add.phtml');
     }
+
+    public function delete()
+    {
+        $id = $_GET['id'];
+
+        $this->appRepo->delete($id);
+
+        header('Location: index.php?route=show&id=' . $id);
+        exit;
+    }
 }

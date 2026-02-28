@@ -28,4 +28,11 @@ class AppreciationRepository extends Repository
 
         return $appreciation;
     }
+
+    public function delete($id_user)
+    {
+        $sql = "DELETE FROM appreciation WHERE id_user=:id_user";
+        $request = $this->pdo->prepare($sql);
+        $request->execute(['id_user' => $id_user]);
+    }
 }
