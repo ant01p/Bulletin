@@ -17,4 +17,6 @@ if ($route === 'index') {
     $userController->index();
 } elseif ($route === 'show') {
     $userController->show();
+} elseif ($route === 'add') {
+    $noteController->add();
 }

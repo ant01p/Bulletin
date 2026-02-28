@@ -1,0 +1,30 @@
+<?php $title = "Remplir"; ?>
+
+<?php ob_start() ?>
+
+    <h1>Remplir le bulletin</h1>
+
+    <h2>
+        <?= htmlspecialchars($user->getFirstname()) ?>
+        <?= htmlspecialchars($user->getLastname()) ?>
+    </h2>
+
+    <form action="?route=add&id=<?= $user->getId() ?>" method="post">
+
+        <label>Commentaire:</label> <br>
+        <textarea name="comment"></textarea> <br>
+
+        <label>Mention :</label> <br>
+        <input type="radio" name="mention" value="Avertissement"> Avertissement
+        <input type="radio" name="mention" value="Encouragements"> Encouragements
+        <input type="radio" name="mention" value="Félicitations"> Félicitations<br>
+        
+        <input type="submit" value="Enregistrer">
+
+    </form> <br>
+
+    <a href="?route=show&id=<?= $user->getId() ?>">Retour à l'élève</a>
+
+<?php $content = ob_get_clean() ?>
+
+<?php require 'src/view/base.phtml' ?>
